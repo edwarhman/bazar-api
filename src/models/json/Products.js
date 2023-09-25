@@ -9,7 +9,6 @@ export class ProductModel {
   }
 
   static async getById ({ id }) {
-    console.log({ id })
-    return data.products.find((el) => el.id === id)
+    return data.products.find((el) => el.id.toString() === id)
   }
 }
