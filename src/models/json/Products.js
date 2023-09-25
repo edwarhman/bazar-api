@@ -11,4 +11,14 @@ export class ProductModel {
   static async getById ({ id }) {
     return data.products.find((el) => el.id.toString() === id)
   }
+
+  static async searchCoicidences ({ search }) {
+    return data.products.filter((product) => {
+      const value = Object.values(product)
+      return value
+        .join(' ')
+        .toLowerCase()
+        .match(new RegExp(`${search}`))
+    })
+  }
 }

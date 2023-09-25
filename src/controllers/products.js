@@ -4,6 +4,11 @@ export class ProductController {
   }
 
   getAll = async (req, res) => {
+    const { search } = req.query
+    if (search) {
+      const filteredProducts = await this.productModel.searchCoicidences({ search })
+      return res.json(filteredProducts)
+    }
     const products = await this.productModel.getAll()
     res.json(products)
   }
