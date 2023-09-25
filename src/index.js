@@ -1,8 +1,9 @@
 import express from 'express'
 import { createProductsRouter } from './routes/products.js'
+import 'dotenv/config.js'
 
 const app = express()
-const port = 3000
+const port = process.env.PORT ?? 3000
 
 export const createApp = ({ productModel }) => {
   app.get('/', (req, res) => {
