@@ -7,16 +7,22 @@ export class ProductController {
     const { search } = req.query
     if (search) {
       const filteredProducts = await this.productModel.searchCoicidences({ search })
-      return res.json(filteredProducts)
+      return res.status(200).json(filteredProducts)
     }
     const products = await this.productModel.getAll()
-    res.json(products)
+    res.status(200).json(products)
   }
 
   getById = async (req, res) => {
     const { id } = req.params
     const product = await this.productModel.getById({ id })
 
-    res.json(product)
+    if (!product) {
+      res.status(404).json({
+        error: 'Product not found'
+      })
+    }
+
+    res.status(200).json(product)
   }
 }
