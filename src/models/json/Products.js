@@ -13,12 +13,14 @@ export class ProductModel {
   }
 
   static async searchCoicidences ({ search }) {
-    return data.products.filter((product) => {
+    const products = data.products.filter((product) => {
       const value = Object.values(product)
       return value
         .join(' ')
         .toLowerCase()
         .match(new RegExp(`${search}`))
     })
+
+    return { ...data, products }
   }
 }
